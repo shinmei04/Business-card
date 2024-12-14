@@ -51,6 +51,7 @@ export const Card = () => {
           height: 150px;
           border-radius: 50%;
           border: 2px solid white;
+          object-fit: cover;
         `}
       />
       <div>
@@ -71,7 +72,7 @@ export const Card = () => {
             新美 昂正
           </h1>
           <p class={subtleStyle}>Kosei Niimi</p>
-          <p class={subtleStyle}>New・Future mobile phone project</p>
+          <p class={subtleStyle}> nimnim.ksi@gmail.com</p>
           <p class={subtleStyle}>
             公立はこだて未来大学 <wbr />
             システム情報科学部 情報アーキテクチャ学科  <wbr />
