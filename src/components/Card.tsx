@@ -76,7 +76,7 @@ export const Card = () => {
           <p class={subtleStyle}>
             公立はこだて未来大学 <wbr />
             システム情報科学部 情報アーキテクチャ学科  <wbr />
-            システム情報コース3年
+            システム情報コース4年
           </p>
         </div>
       </div>
@@ -101,7 +101,7 @@ export const Card = () => {
           rel="noopener noreferrer"
           class={linkStyle}
         >
-          @SHINN_SHINN
+          @coming soon...
         </a>
       </div>
 
