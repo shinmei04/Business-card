@@ -113,7 +113,7 @@ export const Card = () => {
           rel="noopener noreferrer"
           class={linkStyle}
         >
-          @iam_diedie
+          @iam_didi
         </a>
       </div>
 
