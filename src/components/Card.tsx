@@ -71,7 +71,7 @@ export const Card = () => {
           >
             新美 昂正
           </h1>
-          <p class={subtleStyle}>Kosei Niimi</p>
+          <p class={subtleStyle}>Niimi Kosei</p>
           <p class={subtleStyle}> nimnim.ksi@gmail.com</p>
           <p class={subtleStyle}>
             公立はこだて未来大学 <wbr />
