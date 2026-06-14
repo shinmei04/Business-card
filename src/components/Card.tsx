@@ -74,9 +74,9 @@ export const Card = () => {
           <p class={subtleStyle}>Niimi Kosei</p>
           <p class={subtleStyle}> nimnim.ksi@gmail.com</p>
           <p class={subtleStyle}>
-            公立はこだて未来大学 <wbr />
-            システム情報科学部 情報アーキテクチャ学科  <wbr />
-            システム情報コース4年
+            公立はこだて未来大学大学院 <wbr />
+            システム情報科学研究科 情報アーキテクチャ領域  <wbr />
+            修士1年
           </p>
         </div>
       </div>
@@ -89,7 +89,7 @@ export const Card = () => {
           rel="noopener noreferrer"
           class={linkStyle}
         >
-          @Shinmei04
+          @shinmei04
         </a>
       </div>
 
@@ -113,7 +113,7 @@ export const Card = () => {
           rel="noopener noreferrer"
           class={linkStyle}
         >
-          @iam_didi
+          @im_didi_tj
         </a>
       </div>
 
