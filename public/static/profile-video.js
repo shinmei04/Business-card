@@ -13,11 +13,29 @@
   let queue;
   let previousTime = -1;
   let failed = false;
+  // The generated clip changes from black to white during its opening frames.
+  const loopStart = 1.2;
+  const blendDuration = 0.35;
+  let loopFrame = null;
+  let blendStart = null;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   function render() {
     if (!video.videoWidth || video.readyState < 2 || failed) return;
     try {
+      const loopEnd = video.duration - 0.12;
+      if (Number.isFinite(loopEnd) && loopEnd > loopStart + blendDuration &&
+          (video.currentTime < loopStart || video.currentTime >= loopEnd)) {
+        if (!video.seeking) {
+          // Hold the visible, already matted frame throughout decoder seeking.
+          loopFrame = width && stage.classList.contains('is-ready')
+            ? context.getImageData(0, 0, width, height) : null;
+          blendStart = null;
+          video.currentTime = loopStart;
+        }
+        return;
+      }
+      if (video.seeking) return;
       if (!width) {
         width = Math.round(height * video.videoWidth / video.videoHeight);
         canvas.width = width;
@@ -74,6 +92,26 @@
           }
         }
       }
+      if (loopFrame) {
+        if (blendStart === null) blendStart = video.currentTime;
+        const progress = Math.min(1, Math.max(0,
+          (video.currentTime - blendStart) / blendDuration));
+        const weight = progress * progress * (3 - 2 * progress);
+        const old = loopFrame.data;
+        // Blend after background removal, using premultiplied alpha so hair
+        // edges do not briefly turn dark or reveal an opaque rectangle.
+        for (let p = 0; p < pixels.length; p += 4) {
+          const a = old[p + 3] / 255 * (1 - weight);
+          const b = pixels[p + 3] / 255 * weight;
+          const alpha = a + b;
+          for (let channel = 0; channel < 3; channel++) {
+            pixels[p + channel] = alpha > 0
+              ? (old[p + channel] * a + pixels[p + channel] * b) / alpha : 0;
+          }
+          pixels[p + 3] = alpha * 255;
+        }
+        if (progress === 1) loopFrame = null;
+      }
       context.putImageData(frame, 0, 0);
       stage.classList.add('is-ready');
       if (reducedMotion.matches) video.pause();
@@ -102,6 +140,10 @@
   }
   video.addEventListener('play', schedule);
   video.addEventListener('loadeddata', render);
+  video.addEventListener('seeked', () => {
+    render();
+    schedule();
+  });
   reducedMotion.addEventListener('change', () => {
     if (reducedMotion.matches) video.pause();
     else video.play().catch(() => {});
