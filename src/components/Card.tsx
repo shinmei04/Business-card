@@ -43,17 +43,34 @@ export const Card = () => {
         max-width: 375px;
       `}
     >
-      <img
-        src="/static/profile.png"
-        alt="プロフィール画像"
-        class={css`
-          width: 150px;
-          height: 150px;
-          border-radius: 50%;
-          border: 2px solid white;
-          object-fit: cover;
-        `}
-      />
+      <div class="profile">
+        <div class="profile-stage" data-profile-video>
+          <img
+            src="/static/profile-edited.png"
+            alt=""
+            class="profile-placeholder"
+            aria-hidden="true"
+          />
+          <video
+            src="/static/profile.mp4"
+            poster="/static/profile-edited.png"
+            aria-label="笑顔の新美昂正のプロフィール動画"
+            class="profile-image"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+          >
+            <img
+              src="/static/profile-edited.png"
+              alt="笑顔の新美昂正の上半身"
+              class="profile-image"
+            />
+          </video>
+          <canvas class="profile-canvas" aria-hidden="true" />
+        </div>
+      </div>
       <div>
         <div
           class={css`

@@ -3,7 +3,7 @@ import { css } from "hono/css";
 export const fullMetalBackgroundStyle = css`
   display: flex;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   background: linear-gradient(to bottom, #d5dee7 0%, #e8ebf2 50%, #e2e7ed 100%),
     linear-gradient(
       to bottom,
